@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'who asks satan';
+    src: url('/assets/font/whoaskssatan.woff') format('woff'),
+         url('/assets/font/whoaskssatan.ttf') format('truetype');
+}
+
+h1 {
+    font-family: "who asks satan", sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 100px;
+}
+
+body {
+    background-color: black;
+}
+
+.before-text {
+    color: rgb(180, 180, 180);
+    top: 50%;
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.before-text:hover {
+    color: rgb(210, 210, 210);
+    top: 50%;
+    transition: color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.after-text {
+    color: rgb(240, 240, 240);
+    font-size: 75px;
+    transition: font-size 0.3s ease-in-out, top 0.3s ease-in-out, color 0.3s ease-in-out;
+    top: 45%;
+}
+
+@keyframes dropDown {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+#image-container.visible {
+    animation: dropDown 0.3s ease-in-out forwards;
+    pointer-events: auto;
+}
+
+#image-container {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#image-container img {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
