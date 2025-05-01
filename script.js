@@ -23,13 +23,22 @@ document.getElementById("title").addEventListener('click', () => {
         container.classList.add("visible");
 
         links.forEach(link => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "icon-wrapper";
+        
             const img = document.createElement("img");
             img.src = `/assets/images/${link.name}.jpg`;
             img.alt = link.name;
             img.addEventListener('click', () => {
                 window.location.href = link.url;
             });
-            container.appendChild(img);
+        
+            const label = document.createElement("span");
+            label.textContent = link.name;
+            wrapper.appendChild(img);
+            wrapper.appendChild(label);
+        
+            document.getElementById("image-container").appendChild(wrapper);
         });
 
         hasClicked = true;
