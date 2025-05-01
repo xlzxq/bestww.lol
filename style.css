@@ -1,11 +1,10 @@
 @font-face {
-    font-family: 'who asks satan';
-    src: url('/assets/font/whoaskssatan.woff') format('woff'),
-         url('/assets/font/whoaskssatan.ttf') format('truetype');
+    font-family: Daminga;
+    src: url('/assets/font/daminga.otf') format('opentype');
 }
 
 h1 {
-    font-family: "who asks satan", sans-serif;
+    font-family: Daminga, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
