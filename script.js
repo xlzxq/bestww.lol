@@ -11,7 +11,7 @@ const links = [
     { name: "gottya", url: "https://www.youtube.com/@gottya" },
     { name: "nikazul", url: "https://www.youtube.com/@NiKazul" },
     { name: "apaxel", url: "https://www.youtube.com/@apaxei" },
-    { name: "cf43", url: "https://www.youtube.com/@cf_43" },
+    { name: "cf", url: "https://www.youtube.com/@cf_43" },
     { name: "weedy", url: "https://www.youtube.com/@sexyfuckingweedy" }
 ];
 
