@@ -15,7 +15,7 @@ setTimeout(() => {
 // members list loading
 
 async function loadJsons() {
-    const members = ["rayloss", "xlzxq", "tpyie", "cflolxd", "sexyweedy", "qkiruu", "burh"];
+    const members = ["rayloss", "xlzxq", "tpyie", "cflolxd", "sexyweedy", "qkiruu", "burh", "ggrip", "qeik"];
 
     const memberlist = document.getElementById("member-list");
 
