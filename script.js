@@ -1,46 +1,73 @@
-let hasClicked = false;
+// gif loading
+const gif = document.getElementById('gif');
 
-const links = [
-    { name: "burh", url: "https://www.youtube.com/@Burhy" },
-    { name: "rayloss", url: "https://www.youtube.com/@raylossed" },
-    { name: "xlzxq", url: "https://www.youtube.com/@xlzxq" },
-    { name: "sorr", url: "https://www.youtube.com/@s0rrxo" },
-    { name: "battlerite", url: "https://www.youtube.com/@battleritemc" },
-    { name: "beamerboy", url: "https://www.youtube.com/@beamrboy" },
-    { name: "michaux", url: "https://www.youtube.com/@michauuuux" },
-    { name: "gottya", url: "https://www.youtube.com/@gottya" },
-    { name: "nikazul", url: "https://www.youtube.com/@NiKazul" },
-    { name: "apaxel", url: "https://www.youtube.com/@apaxei" },
-    { name: "cf", url: "https://www.youtube.com/@cf_43" },
-    { name: "weedy", url: "https://www.youtube.com/@sexyfuckingweedy" }
-];
+gif.style.display = 'none';
+gif.onload = () => {
+    gif.style.display = 'block';
+};
 
-document.getElementById("title").addEventListener('click', () => {
-    if (!hasClicked) {
-        document.getElementById("title").className = "after-text";
+gif.src = 'assets/bestww.gif' + '?t=' + Date.now();
 
-        const container = document.getElementById("image-container");
-        container.classList.add("visible");
+setTimeout(() => {
+    gif.src = 'assets/bestww.png';
+}, 1900);
 
-        links.forEach(link => {
-            const wrapper = document.createElement("div");
-            wrapper.className = "icon-wrapper";
-        
-            const img = document.createElement("img");
-            img.src = `/assets/images/${link.name}.jpg`;
-            img.alt = link.name;
-            img.addEventListener('click', () => {
-                window.location.href = link.url;
-            });
-        
-            const label = document.createElement("span");
-            label.textContent = link.name;
-            wrapper.appendChild(img);
-            wrapper.appendChild(label);
-        
-            document.getElementById("image-container").appendChild(wrapper);
-        });
+// members list loading
 
-        hasClicked = true;
-    }
-});
+async function loadJsons() {
+    const members = ["rayloss", "xlzxq", "tpyie", "cflolxd", "sexyweedy", "qkiruu", "burh"];
+
+    const memberlist = document.getElementById("member-list");
+
+    members.forEach(async (p) => {
+        const info = await fetch(`/assets/userdata/${p}/info.json`).then(r => r.json());
+        const avatar = `/assets/userdata/${p}/avatar.png`;
+        const countryEmoji = "https://flagcdn.com/24x18/" + info.country.toLowerCase() + ".png";
+
+        const card = document.createElement("div");
+        card.className = "member-card";
+
+        card.innerHTML = `
+                <img src="${avatar}" class="avatar">
+                <div class="info">
+                    <h2>${info.name} <img src=${countryEmoji}></h2>
+                    <p>aka. ${info.aliases.join(", ")}</p>
+                    <div class="socials">
+                        ${Object.entries(info.socials).map(([site, link]) =>
+            `<a href="${link}" target="_blank"><i class="fa-brands fa-${site}"></i></a>`
+        ).join("")}
+                    </div>
+                </div>
+            `;
+
+        memberlist.appendChild(card);
+    });
+
+    // media loading
+    const medialist = document.getElementById("media-list");
+
+    const data = await fetch("/assets/userdata/media.json").then(r => r.json());
+
+    data.videos.forEach(video => {
+        const videoID = new URL(video.url).searchParams.get("v");
+        const embedURL = `https://www.youtube.com/embed/${videoID}`;
+
+        const card = document.createElement("div");
+        card.className = "media-card";
+
+        card.innerHTML = `
+            <iframe 
+                src="${embedURL}" 
+                frameborder="0"
+                allowfullscreen
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
+
+            <p class="creator">Created by ${video.creator}</p>
+        `;
+
+        medialist.appendChild(card);
+    });
+}
+
+loadJsons();
